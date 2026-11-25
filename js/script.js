@@ -165,9 +165,22 @@ if (contactForm) {
       return;
     }
 
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const whatsappText = [
+      'Hello Shreeji Computers,',
+      '',
+      'I would like to request a service:',
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      email ? `Email: ${email}` : '',
+      `Service: ${service}`,
+      message ? `Details: ${message}` : ''
+    ].filter(Boolean).join('\n');
+
     note.style.color = 'var(--blue-700)';
-    note.textContent = `Thank you, ${name}! We'll contact you shortly at ${phone} regarding "${service}".`;
-    contactForm.reset();
+    note.textContent = 'Opening WhatsApp to send your request...';
+    window.open(`https://wa.me/919167456323?text=${encodeURIComponent(whatsappText)}`, '_blank', 'noopener');
   });
 }
 
